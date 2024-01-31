@@ -22,6 +22,9 @@ name = "at-commands"
 version = "0.5.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "aae5bca6dde52912b8f0d5f6b84cdc68737682a9388a895baefd72b113169d66"
+dependencies = [
+ "defmt",
+]
 
 [[package]]
 name = "atomic-polyfill"
@@ -606,6 +609,7 @@ dependencies = [
  "at-commands",
  "cortex-m",
  "critical-section",
+ "defmt",
  "embassy-sync",
  "futures",
  "linked_list_allocator",
@@ -1012,8 +1016,7 @@ dependencies = [
 [[package]]
 name = "tinyrlibc"
 version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5655368446bb9b7724597638c2d7df12a5e76174e69135335432ad006667c9c6"
+source = "git+https://github.com/rust-embedded-community/tinyrlibc.git?rev=e9a3798#e9a37987babe6369d4e48f1ec0da02edba3057ee"
 dependencies = [
  "cc",
 ]

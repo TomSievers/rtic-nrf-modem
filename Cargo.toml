@@ -3,6 +3,14 @@ name = "nrf9160-rtic"
 version = "0.1.0"
 edition = "2021"
 
+[[bin]]
+name = "working"
+path = "src/working.rs"
+
+[[bin]]
+name = "non_working"
+path = "src/non_working.rs"
+
 [dependencies]
 cortex-m = { version = "0.7", features = ["critical-section-single-core"] }
 cortex-m-rt = "0.7"
@@ -13,8 +21,8 @@ nrf9160-hal ={version = "0.16.0", features = ["rt"]}
 fugit = { version = "0.3.7", features = ["defmt"] }
 rtic = {version = "2.0.1", features= ["thumbv8main-backend"]}
 rtic-monotonics = {version = "1.5.0", features=["cortex-m-systick"]}
-nrf-modem = "0.4.1"
-tinyrlibc = "0.3.0"
+nrf-modem = { version = "0.4.0", features = ["defmt"] }
+tinyrlibc = { git = "https://github.com/rust-embedded-community/tinyrlibc.git", rev = "e9a3798" }
 
 [profile.dev]
 codegen-units = 1
