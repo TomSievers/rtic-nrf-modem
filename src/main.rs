@@ -13,6 +13,7 @@ use tinyrlibc as _;
 mod app {
     use super::*;
 
+    use hal::gpio::{Output, Pin, PushPull};
     use nrf_modem::SystemMode;
     use rtic_monotonics::{systick::Systick, create_systick_token};
 
@@ -28,8 +29,6 @@ mod app {
         let systick_token = create_systick_token!();
         Systick::start(cx.core.SYST, 64_000_000, systick_token);
 
-
-        // Schedule the blinking task
         radio::spawn().ok();
 
         (Shared {}, Local { })
@@ -49,5 +48,11 @@ mod app {
             Systick::delay(1.secs()).await;
             defmt::info!("Print");
         }
+    }
+
+    #[task(binds = IPC, priority = 7)]
+    fn ipc(_cx : ipc::Context)
+    {
+        nrf_modem::ipc_irq_handler();
     }
 }
